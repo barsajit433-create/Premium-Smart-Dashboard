@@ -1,0 +1,947 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --cyan: #00ccff;
+    --white: #ffffff;
+    --yellow: #ffcc00;
+    --red: #ff0000;
+
+    --border: rgba(255, 255, 255, 0.18);
+}
+
+body {
+    min-height: 100vh;
+
+    background: #000;
+    color: white;
+
+    font-family: "Inter", sans-serif;
+
+    overflow: hidden;
+}
+
+
+/* =====================================================
+   VIDEO BACKGROUND
+   ===================================================== */
+
+#bgVideo {
+    position: fixed;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    filter:
+        brightness(0.78)
+        contrast(1.08)
+        saturate(1.05);
+
+    z-index: -5;
+}
+
+
+/* =====================================================
+   OVERLAY
+   ===================================================== */
+
+.overlay {
+    position: fixed;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            rgba(0, 0, 0, 0.38),
+            rgba(0, 0, 0, 0.62)
+        );
+
+    backdrop-filter: blur(3px);
+
+    z-index: -4;
+}
+
+
+/* =====================================================
+   BACKGROUND GRID
+   ===================================================== */
+
+.grid-background {
+    position: fixed;
+
+    inset: 0;
+
+    background-image:
+        linear-gradient(
+            rgba(255, 255, 255, 0.025) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0.025) 1px,
+            transparent 1px
+        );
+
+    background-size: 45px 45px;
+
+    pointer-events: none;
+
+    z-index: -3;
+}
+
+
+/* =====================================================
+   NOISE
+   ===================================================== */
+
+.noise {
+    position: fixed;
+
+    inset: 0;
+
+    opacity: 0.025;
+
+    pointer-events: none;
+
+    z-index: 20;
+
+    background-image:
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+
+/* =====================================================
+   MAIN CONTAINER
+   ===================================================== */
+
+.container {
+    position: relative;
+
+    width: min(1120px, 92vw);
+
+    height: 100vh;
+
+    margin: auto;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: center;
+}
+
+
+/* =====================================================
+   TOP BAR
+   ===================================================== */
+
+.topbar {
+    position: absolute;
+
+    top: 25px;
+
+    left: 0;
+
+    width: 100%;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    font-family: "JetBrains Mono", monospace;
+
+    font-size: 12px;
+
+    color: rgba(255, 255, 255, 0.65);
+
+    animation: fadeDown 0.8s ease;
+}
+
+
+.path {
+    display: flex;
+
+    gap: 7px;
+
+    align-items: center;
+}
+
+
+.terminal-symbol {
+    color: var(--cyan);
+}
+
+
+.status {
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    padding: 8px 13px;
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.14);
+
+    border-radius: 50px;
+
+    background:
+        rgba(0, 0, 0, 0.25);
+
+    backdrop-filter: blur(12px);
+}
+
+
+.status-dot {
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+
+    background: #39ff88;
+
+    box-shadow:
+        0 0 12px #39ff88;
+
+    animation: pulse 2s infinite;
+}
+
+
+/* =====================================================
+   MAIN GLASS PANEL
+   ===================================================== */
+
+.clock-glass {
+    position: relative;
+
+    width: min(900px, 100%);
+
+    padding:
+        clamp(45px, 6vw, 75px)
+        clamp(25px, 7vw, 90px);
+
+    border-radius: 34px;
+
+    background:
+        rgba(8, 12, 20, 0.58);
+
+    backdrop-filter: blur(35px);
+
+    -webkit-backdrop-filter: blur(35px);
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.16);
+
+    box-shadow:
+        0 40px 100px rgba(0, 0, 0, 0.65),
+        inset 0 1px rgba(255, 255, 255, 0.15);
+
+    text-align: center;
+
+    overflow: hidden;
+
+    animation: panelIn 0.9s ease;
+}
+
+
+.clock-glass::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 8%;
+
+    width: 84%;
+    height: 1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(0, 204, 255, 0.8),
+            transparent
+        );
+}
+
+
+/* =====================================================
+   HELLO PARTNER
+   ===================================================== */
+
+#helloText {
+    font-size:
+        clamp(34px, 5vw, 60px);
+
+    font-weight: 800;
+
+    letter-spacing: 4px;
+
+    margin-bottom: 30px;
+
+    background:
+        linear-gradient(
+            120deg,
+            #00ccff,
+            #ffffff,
+            #ffcc00,
+            #ff0000,
+            #00ccff
+        );
+
+    background-size: 350% auto;
+
+    -webkit-background-clip: text;
+    background-clip: text;
+
+    -webkit-text-fill-color: transparent;
+
+    animation:
+        helloGradient 5s linear infinite,
+        float 4s ease-in-out infinite;
+
+    filter:
+        drop-shadow(
+            0 0 20px
+            rgba(0, 204, 255, 0.18)
+        );
+}
+
+
+#helloText span {
+    -webkit-text-fill-color: initial;
+
+    animation:
+        rocketGlow 2.5s ease-in-out infinite alternate;
+}
+
+
+/* =====================================================
+   CLOCK
+   ===================================================== */
+
+#clock {
+    font-family:
+        "JetBrains Mono", monospace;
+
+    font-size:
+        clamp(48px, 8vw, 90px);
+
+    font-weight: 700;
+
+    letter-spacing: 4px;
+
+    line-height: 1;
+
+    margin: 10px 0 24px;
+
+    cursor: pointer;
+
+    background:
+        linear-gradient(
+            120deg,
+            #00ccff,
+            #ffffff,
+            #ffcc00,
+            #ff0000,
+            #ffffff,
+            #00ccff
+        );
+
+    background-size: 450% auto;
+
+    -webkit-background-clip: text;
+    background-clip: text;
+
+    -webkit-text-fill-color: transparent;
+
+    filter:
+        drop-shadow(
+            0 0 18px
+            rgba(0, 204, 255, 0.3)
+        );
+
+    animation:
+        clockGradient 6s linear infinite,
+        clockFloat 3s ease-in-out infinite;
+
+    transition: 0.25s ease;
+}
+
+
+#clock:hover {
+    transform: scale(1.025);
+
+    filter:
+        drop-shadow(
+            0 0 30px
+            rgba(0, 204, 255, 0.45)
+        );
+}
+
+
+.blink {
+    animation: blink 1s infinite;
+}
+
+
+/* =====================================================
+   DATE
+   ===================================================== */
+
+#date {
+    font-size: 19px;
+
+    font-weight: 500;
+
+    color:
+        rgba(255, 255, 255, 0.82);
+}
+
+
+/* =====================================================
+   TIMEZONE
+   ===================================================== */
+
+#timezone {
+    margin-top: 9px;
+
+    font-family:
+        "JetBrains Mono", monospace;
+
+    font-size: 13px;
+
+    color: #00eaff;
+
+    letter-spacing: 0.5px;
+
+    text-shadow:
+        0 0 12px
+        rgba(0, 234, 255, 0.35);
+}
+
+
+.clock-hint {
+    margin-top: 20px;
+
+    font-family:
+        "JetBrains Mono", monospace;
+
+    font-size: 10px;
+
+    letter-spacing: 1.5px;
+
+    color:
+        rgba(255, 255, 255, 0.32);
+}
+
+
+/* =====================================================
+   SECTION HEADER
+   ===================================================== */
+
+.section-header {
+    width: min(900px, 100%);
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    margin-top: 30px;
+    margin-bottom: 13px;
+
+    font-family:
+        "JetBrains Mono", monospace;
+
+    font-size: 11px;
+
+    letter-spacing: 2px;
+
+    color:
+        rgba(255, 255, 255, 0.48);
+
+    animation:
+        fadeUp 0.9s 0.2s both;
+}
+
+
+.section-header::after {
+    content: "";
+
+    flex: 1;
+
+    height: 1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0.15),
+            transparent
+        );
+}
+
+
+/* =====================================================
+   WEBSITE GRID
+   ===================================================== */
+
+.grid {
+    width: min(900px, 100%);
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(5, 1fr);
+
+    gap: 13px;
+
+    animation:
+        fadeUp 0.9s 0.35s both;
+}
+
+
+/* =====================================================
+   WEBSITE CARDS
+   ORIGINAL YELLOW PREMIUM STYLE
+   ===================================================== */
+
+.card {
+    position: relative;
+
+    min-height: 105px;
+
+    padding: 20px 12px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 11px;
+
+    border-radius: 20px;
+
+    background:
+        rgba(255, 248, 200, 0.60);
+
+    backdrop-filter: blur(18px);
+
+    -webkit-backdrop-filter: blur(18px);
+
+    border:
+        1px solid
+        rgba(255, 255, 200, 0.65);
+
+    box-shadow:
+        0 10px 25px
+        rgba(0, 0, 0, 0.30),
+
+        inset 0 2px 5px
+        rgba(255, 255, 255, 0.45);
+
+    color: #1a1a1a;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    overflow: hidden;
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        background 0.3s ease;
+}
+
+
+/* ORIGINAL SHINE */
+
+.card::after {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: -100%;
+
+    width: 100%;
+    height: 100%;
+
+    background:
+        linear-gradient(
+            120deg,
+            transparent,
+            rgba(255, 255, 255, 0.65),
+            transparent
+        );
+
+    transition:
+        0.65s ease;
+}
+
+
+.card:hover::after {
+    left: 100%;
+}
+
+
+.card:hover {
+    transform:
+        translateY(-8px)
+        scale(1.015);
+
+    background:
+        rgba(255, 245, 180, 0.88);
+
+    box-shadow:
+        0 18px 50px
+        rgba(0, 0, 0, 0.45);
+
+}
+
+
+/* =====================================================
+   ICON
+   ===================================================== */
+
+.icon-box {
+    width: 40px;
+    height: 40px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 12px;
+
+    background:
+        rgba(255, 255, 255, 0.58);
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.65);
+
+    box-shadow:
+        inset 0 1px
+        rgba(255, 255, 255, 0.8);
+
+    transition:
+        transform 0.3s ease;
+}
+
+
+.card:hover .icon-box {
+    transform: scale(1.08);
+}
+
+
+.card img {
+    width: 23px;
+    height: 23px;
+
+    object-fit: contain;
+}
+
+
+/* =====================================================
+   ADD WEBSITE
+   ===================================================== */
+
+.add-card {
+    border-style: dashed;
+
+    color: #3c3c3c;
+}
+
+
+.add-icon {
+    width: 40px;
+    height: 40px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 12px;
+
+    border:
+        1px dashed
+        rgba(50, 50, 30, 0.4);
+
+    background:
+        rgba(255, 255, 255, 0.35);
+
+    font-size: 22px;
+}
+
+
+/* =====================================================
+   FOOTER
+   ===================================================== */
+
+.footer {
+    position: absolute;
+
+    bottom: 22px;
+
+    width: 100%;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    font-family:
+        "JetBrains Mono", monospace;
+
+    font-size: 10px;
+
+    color:
+        rgba(255, 255, 255, 0.3);
+}
+
+
+.footer span {
+    color:
+        rgba(0, 217, 255, 0.65);
+}
+
+
+/* =====================================================
+   ANIMATIONS
+   ===================================================== */
+
+@keyframes helloGradient {
+
+    0% {
+        background-position: 0% center;
+    }
+
+    100% {
+        background-position: 350% center;
+    }
+}
+
+
+@keyframes clockGradient {
+
+    0% {
+        background-position: 0% center;
+    }
+
+    100% {
+        background-position: 450% center;
+    }
+}
+
+
+@keyframes rocketGlow {
+
+    from {
+        filter:
+            drop-shadow(
+                0 0 5px #00ccff
+            );
+    }
+
+    to {
+        filter:
+            drop-shadow(
+                0 0 22px #ff3b3b
+            );
+    }
+}
+
+
+@keyframes float {
+
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-7px);
+    }
+}
+
+
+@keyframes clockFloat {
+
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-4px);
+    }
+}
+
+
+@keyframes blink {
+
+    50% {
+        opacity: 0.25;
+    }
+}
+
+
+@keyframes pulse {
+
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.45;
+        transform: scale(0.8);
+    }
+}
+
+
+@keyframes panelIn {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(25px)
+            scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+}
+
+
+@keyframes fadeUp {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(18px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0);
+    }
+}
+
+
+@keyframes fadeDown {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(-15px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0);
+    }
+}
+
+
+/* =====================================================
+   RESPONSIVE
+   ===================================================== */
+
+@media (max-width: 900px) {
+
+    .grid {
+        grid-template-columns:
+            repeat(3, 1fr);
+    }
+
+    .clock-glass {
+        padding: 50px 30px;
+    }
+}
+
+
+@media (max-width: 600px) {
+
+    body {
+        overflow-y: auto;
+    }
+
+    .container {
+        min-height: 100vh;
+
+        padding:
+            80px 0 70px;
+    }
+
+    .path {
+        display: none;
+    }
+
+    .topbar {
+        justify-content: flex-end;
+    }
+
+    .clock-glass {
+        padding: 45px 18px;
+
+        border-radius: 25px;
+    }
+
+    #helloText {
+        letter-spacing: 2px;
+    }
+
+    #clock {
+        letter-spacing: 1px;
+    }
+
+    .grid {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .footer {
+        bottom: 14px;
+    }
+}
+
+
+@media (max-width: 360px) {
+
+    .grid {
+        grid-template-columns: 1fr;
+    }
+}

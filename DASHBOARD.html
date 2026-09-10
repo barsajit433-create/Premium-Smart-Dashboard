@@ -1,0 +1,273 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Barsajit Premium Dashboard</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- BACKGROUND VIDEO -->
+    <video autoplay muted loop playsinline id="bgVideo">
+        <source src="background.mp4" type="video/mp4">
+    </video>
+
+    <div class="overlay"></div>
+    <div class="grid-background"></div>
+    <div class="noise"></div>
+
+
+    <main class="container">
+
+        <!-- TOP BAR -->
+        <header class="topbar">
+
+            <div class="path">
+                <span class="terminal-symbol"></span>
+                <span>Dashboard</span>
+            </div>
+
+            <div class="status">
+                <span class="status-dot"></span>
+                SYSTEM ONLINE
+            </div>
+
+        </header>
+
+
+        <!-- MAIN CLOCK PANEL -->
+        <section class="clock-glass">
+
+            <div id="helloText">
+                HELLO PARTNER <span>🚀</span>
+            </div>
+
+            <div id="clock"
+                onclick="toggleFormat()"
+                title="Click to switch 12/24 hour format"
+                role="button"
+                tabindex="0">
+            </div>
+
+            <div id="date"></div>
+
+            <div id="timezone"></div>
+
+            <div class="clock-hint">
+                CLICK CLOCK · TOGGLE 12 / 24 HOUR
+            </div>
+
+        </section>
+
+
+        <!-- QUICK ACCESS -->
+        <div class="section-header">
+            QUICK ACCESS
+        </div>
+
+
+        <!-- WEBSITE GRID -->
+        <nav class="grid">
+
+
+            <!-- LINKEDIN -->
+
+            <a href="https://www.linkedin.com"
+                target="_blank"
+                rel="noopener noreferrer">
+
+                <div class="card">
+
+                    <div class="icon-box">
+
+                        <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png"
+                            alt="LinkedIn">
+
+                    </div>
+
+                    <span>LinkedIn</span>
+
+                </div>
+
+            </a>
+
+
+            <!-- GITHUB -->
+
+            <a href="https://github.com/dashboard"
+                target="_blank"
+                rel="noopener noreferrer">
+
+                <div class="card">
+
+                    <div class="icon-box">
+
+                        <img src="https://cdn-icons-png.flaticon.com/512/733/733553.png"
+                            alt="GitHub">
+
+                    </div>
+
+                    <span>GitHub</span>
+
+                </div>
+
+            </a>
+
+
+            <!-- YOUTUBE -->
+
+            <a href="https://www.youtube.com"
+                target="_blank"
+                rel="noopener noreferrer">
+
+                <div class="card">
+
+                    <div class="icon-box">
+
+                        <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png"
+                            alt="YouTube">
+
+                    </div>
+
+                    <span>YouTube</span>
+
+                </div>
+
+            </a>
+
+
+            <!-- GOOGLE -->
+
+            <a href="https://www.google.com"
+                target="_blank"
+                rel="noopener noreferrer">
+
+                <div class="card">
+
+                    <div class="icon-box">
+
+                        <img src="https://cdn-icons-png.flaticon.com/512/2702/2702602.png"
+                            alt="Google">
+
+                    </div>
+
+                    <span>Google</span>
+
+                </div>
+
+            </a>
+
+
+            <!-- CHROME -->
+
+            <a href="https://www.google.com/chrome/"
+                target="_blank"
+                rel="noopener noreferrer">
+
+                <div class="card">
+
+                    <div class="icon-box">
+
+                        <img src="https://icons.iconarchive.com/icons/simpleicons-team/simple/128/google-chrome-icon.png"
+                            alt="Chrome">
+
+                    </div>
+
+                    <span>Chrome</span>
+
+                </div>
+
+            </a>
+
+
+            <!-- ADD WEBSITE -->
+
+            <a href="#" onclick="return false;">
+
+                <div class="card add-card">
+
+                    <div class="add-icon">+</div>
+
+                    <span>Add Website</span>
+
+                </div>
+
+            </a>
+
+
+            <a href="#" onclick="return false;">
+
+                <div class="card add-card">
+
+                    <div class="add-icon">+</div>
+
+                    <span>Add Website</span>
+
+                </div>
+
+            </a>
+
+
+            <a href="#" onclick="return false;">
+
+                <div class="card add-card">
+
+                    <div class="add-icon">+</div>
+
+                    <span>Add Website</span>
+
+                </div>
+
+            </a>
+
+
+            <a href="#" onclick="return false;">
+
+                <div class="card add-card">
+
+                    <div class="add-icon">+</div>
+
+                    <span>Add Website</span>
+
+                </div>
+
+            </a>
+
+        </nav>
+
+
+        <!-- FOOTER -->
+
+        <footer class="footer">
+
+            <div>
+                STATUS: <span>READY</span>
+            </div>
+
+            <div>
+                BARSAJIT OS · v1.0.0
+            </div>
+
+        </footer>
+
+    </main>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
+
